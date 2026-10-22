@@ -55,11 +55,11 @@ jobs:
       - name: RUN Trivy Vulnerability Scanner
         uses: aquasecurity/trivy-action@v0.36.0
         with:
-          Scan type: 'fs'
-          Scan-ref: 'requirements.txt'
+          scan type: 'fs'
+          scan-ref: 'requirements.txt'
           scanners: 'vuln'
           format: 'table'
-          severity: "HIGH,CRITICAL'
+          severity: 'HIGH,CRITICAL'
           exit-code: '1'
           
       
