@@ -44,7 +44,24 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
        
+  dependency-scan:
+    name: Dependency Vulnerability Scanning
+    runs-on: ubuntu-latest
 
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.1.0
+   
+      - name: RUN Trivy Vulnerability Scanner
+        uses: aquasecurity/trivy-action@v0.36.0
+        with:
+          Scan type: 'fs'
+          Scan-ref: 'requirements.txt'
+          scanners: 'vuln'
+          format: 'table'
+          severity: "HIGH,CRITICAL'
+          exit-code: '1'
+          
       
        
       
