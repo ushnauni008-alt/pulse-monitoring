@@ -33,7 +33,7 @@ jobs:
         run: python -m pytest test_monitor.py -v
 
   security:
-     name: Secrest Scanning
+     name: Secret Scanning
      runs-on: ubuntu-latest
      
      steps:
