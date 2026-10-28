@@ -6,6 +6,10 @@ from ssl_check import check_ssl_certificate
 app = FastAPI()
 RESPONSE_TIME_THRESHOLD_MS = 1000
 
+@app.get("/health")
+def health_check():
+    return {"status": "healthy"}
+
 @app.get("/")
 def home():
     return {"message": "Welcome to Pulse Monitoring Application"}

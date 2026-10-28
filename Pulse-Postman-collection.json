@@ -1,0 +1,92 @@
+{
+  "info": {
+    "_postman_id": "9122ed78-6129-4d0c-8b23-0707b3e1fc0e",
+    "name": "Pulse Monitoring API Tests",
+    "description": "### Welcome to Postman! This is your first collection. \n\nCollections are your starting point for building and testing APIs. You can use this one to:\n\n• Group related requests\n• Test your API in real-world scenarios\n• Document and share your requests\n\nUpdate the name and overview whenever you’re ready to make it yours.\n\n[Learn more about Postman Collections.](https://learning.postman.com/docs/collections/collections-overview/)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "59206152",
+    "_collection_link": "https://go.postman.co/collection/59206152-9122ed78-6129-4d0c-8b23-0707b3e1fc0e?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Pulse - Negative Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Invalid website returns HTTP 400\", function () {\n    pm.response.to.have.status(400);\n});\n\npm.test(\"Correct error message is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.detail).to.eql(\"Website not allowed\");\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/monitor?site=unknown",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "monitor"
+          ],
+          "query": [
+            {
+              "key": "site",
+              "value": "unknown"
+            }
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    },
+    {
+      "name": "Pulse - Positive Test",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "type": "text/javascript",
+            "exec": [
+              "pm.test(\"Valid website returns HTTP 200\", function () {\n    pm.response.to.have.status(200);\n});\n\npm.test(\"Correct website is returned\", function () {\n    const response = pm.response.json();\n    pm.expect(response.website).to.eql(\"example.com\");\n});\n\npm.test(\"HTTP monitoring data is present\", function () {\n    const response = pm.response.json();\n    pm.expect(response).to.have.property(\"http_monitoring\");\n});"
+            ]
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://127.0.0.1:8000/monitor?site=example",
+          "protocol": "http",
+          "host": [
+            "127",
+            "0",
+            "0",
+            "1"
+          ],
+          "port": "8000",
+          "path": [
+            "monitor"
+          ],
+          "query": [
+            {
+              "key": "site",
+              "value": "example"
+            }
+          ]
+        },
+        "description": "This is a GET request and it is used to \"get\" data from an endpoint. There is no request body for a GET request, but you can use query parameters to help specify the resource you want data on (e.g., in this request, we have `id=1`).\n\nA successful GET response will have a `200 OK` status, and should include some kind of response body - for example, HTML web content or JSON data."
+      },
+      "response": []
+    }
+  ]
+}
